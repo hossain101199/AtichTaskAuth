@@ -27,9 +27,8 @@ const SignUpPage = () => {
       const data = {
         name: e.target.name.value,
         email: e.target.email.value,
-        password: e.target.password.value,
         contactNo: e.target.contactNo.value,
-        address: e.target.address.value,
+        password: e.target.password.value,
         profileImg: imgURL,
       };
 
@@ -57,13 +56,12 @@ const SignUpPage = () => {
         <LHeading className="text-center pb-10">Sign Up</LHeading>
         <form onSubmit={handleSubmit}>
           <InputField name="name" type="text" placeholder="Full Name" />
+          <InputField name="email" type="email" placeholder="Email address" />
           <InputField
             name="contactNo"
             type="number"
             placeholder="Mobile Number"
           />
-          <InputField name="address" type="text" placeholder="Address" />
-          <InputField name="email" type="email" placeholder="Email address" />
           <InputField
             name="password"
             type={showPassword ? "text" : "password"}

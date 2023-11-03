@@ -13,6 +13,7 @@ module.exports = {
         darkblue: "#0A2540",
         action: "#FF4000",
         mercury: "#E6E8EC",
+
         yellow: "#F2B556",
         danger: "#FF114A",
         success: "#5DC80C",

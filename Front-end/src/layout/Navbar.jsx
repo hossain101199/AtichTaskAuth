@@ -4,12 +4,12 @@ import logo from "../assets/images/logo.png";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { getStoredData, removeStorageData } from "@/utils/localStorage";
-import { logOut, setCredentials } from "@/redux/features/auth/authSlice";
-import { removeAccessToken } from "@/utils/cookies";
+import { getStoredData } from "@/utils/localStorage";
+import { setCredentials } from "@/redux/features/auth/authSlice";
+import NavProfile from "@/components/atoms/NavProfile";
 
 const Navbar = () => {
-  const { name, profileImg } = useSelector((state) => state.auth);
+  const { name } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -27,12 +27,6 @@ const Navbar = () => {
     }
   }, [dispatch]);
 
-  const handleSignOut = () => {
-    removeStorageData("profile");
-    removeAccessToken();
-    dispatch(logOut());
-  };
-
   return (
     <nav>
       <Container className="flex justify-between items-center">
@@ -40,21 +34,7 @@ const Navbar = () => {
           <Image src={logo} alt="logo" width={100}></Image>
         </Link>
         {name ? (
-          <div className="flex items-center justify-between">
-            {/* <Image
-              className="h-8 w-8 rounded-full"
-              width={8}
-              height={8}
-              src={profileImg}
-              alt=""
-            /> */}
-            <button
-              onClick={handleSignOut}
-              className="px-5 py-2 w-fit font-medium text-danger"
-            >
-              Sign Out
-            </button>
-          </div>
+          <NavProfile />
         ) : (
           <Link
             href="sign-in"

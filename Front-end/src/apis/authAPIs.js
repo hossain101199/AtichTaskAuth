@@ -21,7 +21,12 @@ const authAPI = {
       return data.data;
     }
   },
+
+  async changePassword(data) {
+    const response = await api.post("/auth/change-password", data);
+    return response.data;
+  },
 };
 
-export const { signUp, signIn } = authAPI;
+export const { signUp, signIn, changePassword } = authAPI;
 export default authAPI;
