@@ -18,6 +18,8 @@ const createUserInDB = async (payload: User): Promise<IUser> => {
     Number(config.bcrypt_salt_rounds)
   );
 
+  // payload.role = UserRole.ADMIN;
+
   const createdUser = await prisma.user.create({
     data: payload,
     select: {
@@ -42,6 +44,8 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     where: { email: email },
     select: {
       id: true,
+      name: true,
+      profileImg: true,
       role: true,
       password: true,
     },
@@ -49,7 +53,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
 
   if (isUserExist) {
     if (await bcrypt.compare(password, isUserExist.password)) {
-      const { id, role } = isUserExist;
+      const { id, name, profileImg, role } = isUserExist;
 
       const accessToken = jwt.sign(
         {
@@ -70,6 +74,9 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
       );
 
       return {
+        name,
+        role,
+        profileImg,
         accessToken,
         refreshToken,
       };

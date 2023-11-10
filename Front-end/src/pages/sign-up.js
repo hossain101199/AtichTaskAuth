@@ -1,10 +1,11 @@
-import { signUp } from "@/apis/authAPIs";
 import UploadIcon from "@/assets/svgs/UploadIcon";
 import Card from "@/components/atoms/Card";
 import Container from "@/components/atoms/Container";
 import InputField from "@/components/atoms/InputFeild";
 import LHeading from "@/components/atoms/LHeading";
+import SpinnerButton from "@/components/atoms/SpinnerButton";
 import Navbar from "@/layout/Navbar";
+import { useSignUpMutation } from "@/redux/features/auth/authApi";
 import imageUpload from "@/utils/imageUpload";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,37 +13,39 @@ import { useState } from "react";
 
 const SignUpPage = () => {
   const [document, setDocument] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [signUp, { isLoading, error }] = useSignUpMutation();
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
+
     try {
-      const formData = new FormData();
-      formData.append("image", document);
-      const imgURL = await imageUpload(formData);
+      if (document) {
+        const formData = new FormData();
+        formData.append("image", e.target.profileImg.files[0]);
+        const imgURL = await imageUpload(formData);
 
-      const data = {
-        name: e.target.name.value,
-        email: e.target.email.value,
-        contactNo: e.target.contactNo.value,
-        password: e.target.password.value,
-        profileImg: imgURL,
-      };
+        const data = {
+          name: e.target.name.value,
+          email: e.target.email.value,
+          contactNo: e.target.contactNo.value,
+          password: e.target.password.value,
+          profileImg: imgURL,
+        };
 
-      const result = await signUp(data);
+        const result = await signUp(data);
 
-      if (result.statusCode == 200) {
-        router.push("/sign-in");
-      } else {
-        console.error("API call failed:", result);
+        if (result?.data?.statusCode == 200) {
+          router.push("/sign-in");
+          e.target.reset();
+        }
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);
     }
-    setIsLoading(false);
   };
 
   const handlePicture = async (file) => {
@@ -54,7 +57,7 @@ const SignUpPage = () => {
     <Container className="min-h-[70vh] flex justify-center items-center">
       <Card className="p-[50px] max-w-md w-full shadow-lg">
         <LHeading className="text-center pb-10">Sign Up</LHeading>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} disabled={isLoading}>
           <InputField name="name" type="text" placeholder="Full Name" />
           <InputField name="email" type="email" placeholder="Email address" />
           <InputField
@@ -71,7 +74,7 @@ const SignUpPage = () => {
             showIcon
           />
 
-          <label className="flex justify-center items-center border-2 border-dashed rounded-md cursor-pointer hover:border-gray-400 focus:outline-none mb-5 p-4 h-20">
+          <label className="flex justify-center items-center border-2 border-dashed rounded-lg cursor-pointer hover:border-gray-400 focus:outline-none mb-5 p-4 h-20">
             <div className="w-full text-center">
               {document ? (
                 <p className="text-sm font-medium max-w-md truncate">
@@ -87,19 +90,14 @@ const SignUpPage = () => {
               )}
             </div>
             <input
+              name="profileImg"
               className="hidden"
               id="filesUpload"
               type="file"
               onChange={(e) => handlePicture(e.target.files[0])}
             />
           </label>
-
-          <button
-            className="w-full bg-action rounded-lg py-3 text-white font-semibold"
-            type="submit"
-          >
-            Sign Up
-          </button>
+          <SpinnerButton isLoading={isLoading} title="Sign Up" />
         </form>
 
         <p className="text-center text-[#828B9E] mt-5">
@@ -123,3 +121,30 @@ SignUpPage.getLayout = function getLayout(page) {
 };
 
 export default SignUpPage;
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   try {
+//     const formData = new FormData();
+//     formData.append("image", document);
+//     const imgURL = await imageUpload(formData);
+
+//     const data = {
+//       name: e.target.name.value,
+//       email: e.target.email.value,
+//       contactNo: e.target.contactNo.value,
+//       password: e.target.password.value,
+//       profileImg: imgURL,
+//     };
+
+//     const result = await signUp(data);
+
+//     if (result.statusCode == 200) {
+//       router.push("/sign-in");
+//     } else {
+//       console.error("API call failed:", result);
+//     }
+//   } catch (error) {
+//     console.error("An unexpected error occurred:", error);
+//   }
+// };

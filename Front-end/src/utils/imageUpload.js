@@ -1,5 +1,7 @@
+import { getImageBBKey } from "@/config/envConfig";
+
 const imageUpload = async (formData) => {
-  const url = `https://api.imgbb.com/1/upload?key=4fc398737b73ab4a5927cdcc90d58258`;
+  const url = `https://api.imgbb.com/1/upload?key=${getImageBBKey()}`;
   const response = await fetch(url, {
     method: "POST",
     body: formData,

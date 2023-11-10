@@ -1,7 +1,7 @@
 import Container from "@/components/atoms/Container";
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
-import React, { useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { getStoredData } from "@/utils/localStorage";
@@ -14,11 +14,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const userData = getStoredData("profile");
+    const userData = getStoredData("user");
+
     if (userData) {
       dispatch(
         setCredentials({
-          id: userData.id,
           name: userData.name,
           role: userData.role,
           profileImg: userData.profileImg,

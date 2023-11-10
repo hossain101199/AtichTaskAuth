@@ -1,10 +1,10 @@
-import { signIn } from "@/apis/authAPIs";
 import Card from "@/components/atoms/Card";
 import Container from "@/components/atoms/Container";
 import InputField from "@/components/atoms/InputFeild";
 import LHeading from "@/components/atoms/LHeading";
-
+import SpinnerButton from "@/components/atoms/SpinnerButton";
 import Navbar from "@/layout/Navbar";
+import { useSignInMutation } from "@/redux/features/auth/authApi";
 import { setCredentials } from "@/redux/features/auth/authSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,13 +13,14 @@ import { useDispatch } from "react-redux";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+
+  const [signIn, { isLoading, error }] = useSignInMutation();
 
   const dispatch = useDispatch();
 
+  const router = useRouter();
+
   const handleSubmit = async (e) => {
-    setIsLoading(true);
     e.preventDefault();
 
     try {
@@ -29,27 +30,27 @@ const SignInPage = () => {
       };
 
       const result = await signIn(data);
-      if (result) {
+
+      if (result?.data.statusCode == 200) {
         dispatch(
           setCredentials({
-            id: result.id,
-            name: result.name,
-            role: result.role,
-            profileImg: result.profileImg,
+            name: result?.data?.data.name,
+            role: result?.data?.data.role,
+            profileImg: result?.data?.data.profileImg,
           })
         );
         router.push("/");
+        e.target.reset();
       }
     } catch (error) {
       console.log(error);
     }
-    setIsLoading(false);
   };
   return (
     <Container className="min-h-[70vh] flex justify-center items-center">
       <Card className="p-[50px] max-w-md w-full shadow-lg">
         <LHeading className="text-center pb-10">Sign In</LHeading>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} disabled={isLoading}>
           <InputField name="email" type="email" placeholder="Email address" />
           <InputField
             name="password"
@@ -62,12 +63,7 @@ const SignInPage = () => {
           <Link href="#">
             <p className="text-end mb-5">Forgot Password?</p>
           </Link>
-          <button
-            className="w-full bg-action rounded-lg py-3 text-white font-semibold"
-            type="submit"
-          >
-            Sign in
-          </button>
+          <SpinnerButton isLoading={isLoading} title="Sign In" />
         </form>
 
         <p className="text-center text-[#828B9E] mt-5">

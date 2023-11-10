@@ -4,6 +4,9 @@ export type ILoginUser = {
 };
 
 export type ILoginUserResponse = {
+  name: string;
+  role: string;
+  profileImg: string;
   accessToken: string;
   refreshToken?: string;
 };
