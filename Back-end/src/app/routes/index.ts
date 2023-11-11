@@ -1,5 +1,6 @@
 import express from 'express';
 import { authRoutes } from '../modules/auth/auth.route';
+import { priorityRoutes } from '../modules/priority/priority.route';
 import { profileRoutes } from '../modules/profile/profile.route';
 import { userRoutes } from '../modules/user/user.route';
 
@@ -18,7 +19,10 @@ const moduleRoutes = [
     path: '/profile',
     route: profileRoutes,
   },
-
+  {
+    path: '/priorities',
+    route: priorityRoutes,
+  },
 ];
 
 moduleRoutes.forEach(route => routes.use(route.path, route.route));

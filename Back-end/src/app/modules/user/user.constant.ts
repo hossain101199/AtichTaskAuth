@@ -4,6 +4,5 @@ export const userFilterableFields = [
   'searchTerm',
   'name',
   'email',
-
   'contactNo',
 ];
