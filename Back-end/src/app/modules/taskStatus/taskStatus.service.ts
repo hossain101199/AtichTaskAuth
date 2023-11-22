@@ -9,6 +9,7 @@ const createTaskStatusInDb = async (
   if (user?.role == UserRole.USER) {
     payload.creatorId = user?.id;
   }
+
   const result = await prisma.taskStatus.create({
     data: payload,
   });
