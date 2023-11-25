@@ -1,5 +1,3 @@
-import React from "react";
-
 const LHeading = ({ className = "", children = null }) => {
   return (
     <h3

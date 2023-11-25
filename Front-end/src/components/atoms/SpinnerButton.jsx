@@ -1,5 +1,3 @@
-import React from "react";
-
 const SpinnerButton = ({ isLoading, title = "", className = "w-full" }) => {
   return (
     <button
@@ -10,7 +8,7 @@ const SpinnerButton = ({ isLoading, title = "", className = "w-full" }) => {
       {isLoading ? (
         <svg
           aria-hidden="true"
-          className="w-6 h-6  animate-spin  fill-action"
+          className="w-6 h-6 animate-spin fill-action"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

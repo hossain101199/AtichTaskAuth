@@ -1,7 +1,5 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 import Container from "@/components/atoms/Container";
+import Navbar from "./Navbar";
 
 const RootLayout = ({ children }) => {
   return (

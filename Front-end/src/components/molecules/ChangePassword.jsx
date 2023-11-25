@@ -1,16 +1,16 @@
+import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
 import { useState } from "react";
 import Card from "../atoms/Card";
 import InputField from "../atoms/InputFeild";
 import MHeading from "../atoms/MHeading";
 import SpinnerButton from "../atoms/SpinnerButton";
 import XLParagraph from "../atoms/XLParagraph";
-import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
 
 const ChangePassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setNewShowPassword] = useState(false);
 
-  const [changePassword, { isLoading, error }] = useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const ChangePassword = () => {
         newPassword: e.target.newPassword.value,
       };
 
-      const result = await changePassword(data);
+      await changePassword(data);
     } catch (error) {
       console.log(error);
     }

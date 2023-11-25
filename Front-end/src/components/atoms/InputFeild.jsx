@@ -1,23 +1,21 @@
 import EyeIcon from "@/assets/svgs/EyeIcon";
 import HideIcon from "@/assets/svgs/HideIcon";
+import { useField } from "formik";
 
 const InputField = ({
-  placeholder = "",
-  name = "",
-  type = "",
-  error = "",
   showIcon = false,
   showPassword = Boolean,
   setShowPassword,
+  ...props
 }) => {
+  const [field, meta] = useField(props);
   return (
-    <div className="mb-5">
-      <div className="flex rounded-lg py-3 px-3 w-full bg-ghostwhite">
+    <div>
+      <div className="flex rounded-lg p-3 w-full bg-ghostwhite">
         <input
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          className="outline-0 mx-2 w-full text-sm font-medium bg-ghostwhite placeholder:text-slategray"
+          className="outline-0 w-full text-sm font-medium bg-ghostwhite placeholder:text-slategray"
+          {...field}
+          {...props}
         />
 
         {showIcon &&
@@ -38,8 +36,8 @@ const InputField = ({
           ))}
       </div>
 
-      {error ? (
-        <div className="error text-start text-red-600">{error}</div>
+      {meta.touched && meta.error ? (
+        <p className="error text-start text-red-600">{meta.error}</p>
       ) : null}
     </div>
   );

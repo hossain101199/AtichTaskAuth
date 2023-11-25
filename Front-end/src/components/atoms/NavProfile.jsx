@@ -1,11 +1,11 @@
 import { logOut } from "@/redux/features/auth/authSlice";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import Card from "./Card";
-import { useState } from "react";
-import Paragraph from "./Paragraph";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Card from "./Card";
+import Paragraph from "./Paragraph";
 
 const NavProfile = () => {
   const { profileImg } = useSelector((state) => state.auth);

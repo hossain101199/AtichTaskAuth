@@ -1,6 +1,6 @@
 import { removeAccessToken } from "@/utils/cookies";
 import { removeStorageData } from "@/utils/localStorage";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   name: null,
