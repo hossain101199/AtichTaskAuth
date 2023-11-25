@@ -12,8 +12,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { initialValues } from "./signInInitialValues";
-import { validationSchema } from "./signInValidationSchema";
+import { initialValues } from "../utils/initialValues/signInInitialValues";
+import { validationSchema } from "../utils/validationSchemas/signInValidationSchema";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);

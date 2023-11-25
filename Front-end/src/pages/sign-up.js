@@ -12,8 +12,8 @@ import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { initialValues } from "./signUpInitialValues";
-import { validationSchema } from "./signUpValidationSchema";
+import { initialValues } from "../utils/initialValues/signUpInitialValues";
+import { validationSchema } from "../utils/validationSchemas/signUpValidationSchema";
 
 const SignUpPage = () => {
   const [document, setDocument] = useState(null);
