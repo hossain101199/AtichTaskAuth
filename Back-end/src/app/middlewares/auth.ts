@@ -14,6 +14,7 @@ const auth =
           token,
           config.jwt.secret as Secret
         ) as JwtPayload;
+
         if (
           requiredRoles.length &&
           requiredRoles.includes(verifiedToken.role)

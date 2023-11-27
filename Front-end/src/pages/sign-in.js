@@ -7,13 +7,14 @@ import SpinnerButton from "@/components/atoms/SpinnerButton";
 import Navbar from "@/layout/Navbar";
 import { useSignInMutation } from "@/redux/features/auth/authApi";
 import { setCredentials } from "@/redux/features/auth/authSlice";
+import { initialValues } from "@/utils/initialValues/signInInitialValues";
+import { validationSchema } from "@/utils/validationSchemas/signInValidationSchema";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { initialValues } from "../utils/initialValues/signInInitialValues";
-import { validationSchema } from "../utils/validationSchemas/signInValidationSchema";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +30,7 @@ const SignInPage = () => {
       const result = await signIn(values);
 
       if (result?.data.statusCode == 200) {
+        toast.success("Welcome back! You've successfully logged in.");
         dispatch(
           setCredentials({
             name: result?.data?.data.name,
@@ -40,7 +42,8 @@ const SignInPage = () => {
         router.push("/");
       }
     } catch (error) {
-      throw new Error("Could not logged in at this time. Try again", error);
+      toast.error("Oops! Something went wrong. Please try again.");
+      throw new Error("An unexpected error occurred:", error);
     }
   };
   return (

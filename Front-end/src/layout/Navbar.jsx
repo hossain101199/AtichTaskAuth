@@ -1,31 +1,12 @@
 import Container from "@/components/atoms/Container";
 import NavProfile from "@/components/atoms/NavProfile";
-import { setCredentials } from "@/redux/features/auth/authSlice";
-import { getStoredData } from "@/utils/localStorage";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   const { name } = useSelector((state) => state.auth);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const userData = getStoredData("user");
-
-    if (userData) {
-      dispatch(
-        setCredentials({
-          name: userData.name,
-          role: userData.role,
-          profileImg: userData.profileImg,
-        })
-      );
-    }
-  }, [dispatch]);
 
   return (
     <nav>

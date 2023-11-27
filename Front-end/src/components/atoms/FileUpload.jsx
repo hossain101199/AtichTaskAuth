@@ -22,6 +22,7 @@ const FileUpload = ({ handlePicture, document, documentError }) => {
           name="profileImg"
           className="hidden"
           type="file"
+          accept=".jpg, .jpeg, .png"
           onChange={(e) => handlePicture(e.target.files[0])}
         />
       </label>

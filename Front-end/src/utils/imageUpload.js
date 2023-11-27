@@ -1,13 +1,20 @@
 import { getImageBBKey } from "@/config/envConfig";
+import toast from "react-hot-toast";
 
 const imageUpload = async (formData) => {
-  const url = `https://api.imgbb.com/1/upload?key=${getImageBBKey()}`;
-  const response = await fetch(url, {
-    method: "POST",
-    body: formData,
-  });
-  const result = await response.json();
-  return result.data.url;
+  try {
+    const url = `https://api.imgbb.com/1/upload?key=${getImageBBKey()}`;
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    toast.error("Oops! Something went wrong. Please try again.");
+    throw new Error("An unexpected error occurred:", error);
+  }
 };
 
 export default imageUpload;

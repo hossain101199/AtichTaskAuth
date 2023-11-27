@@ -1,3 +1,5 @@
+import { getAccessToken } from "@/utils/cookies";
+
 const { API } = require("@/redux/api/apiSlice");
 
 const profileAPI = API.injectEndpoints({
@@ -5,6 +7,7 @@ const profileAPI = API.injectEndpoints({
     getProfile: builder.query({
       query: () => ({
         url: `/profile`,
+        headers: { Authorization: `${getAccessToken()}` },
       }),
     }),
   }),

@@ -8,57 +8,68 @@ import SpinnerButton from "@/components/atoms/SpinnerButton";
 import Navbar from "@/layout/Navbar";
 import { useSignUpMutation } from "@/redux/features/auth/authApi";
 import imageUpload from "@/utils/imageUpload";
+import { initialValues } from "@/utils/initialValues/signUpInitialValues";
+import { validationSchema } from "@/utils/validationSchemas/signUpValidationSchema";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { initialValues } from "../utils/initialValues/signUpInitialValues";
-import { validationSchema } from "../utils/validationSchemas/signUpValidationSchema";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
-  const [document, setDocument] = useState(null);
-  const [documentError, setDocumentError] = useState("");
+  const [state, setState] = useState({
+    document: null,
+    documentError: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
 
   const [signUp, { isLoading, error, isError }] = useSignUpMutation();
 
   const router = useRouter();
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (
+    { name, email, contactNo, password },
+    { setSubmitting }
+  ) => {
     try {
-      if (document) {
-        const formData = new FormData();
+      const formData = new FormData();
 
-        formData.append("image", document);
+      if (!state.document) {
+        setState({ ...state, documentError: "Profile picture is required" });
+        return;
+      }
 
-        const imgURL = await imageUpload(formData);
+      formData.append("image", document);
 
+      const imgURL = await imageUpload(formData);
+
+      if (imgURL && imgURL.success) {
         const data = {
-          name: values.name,
-          email: values.email,
-          contactNo: values.contactNo,
-          password: values.password,
-          profileImg: imgURL,
+          name: name,
+          email: email,
+          contactNo: contactNo,
+          password: password,
+          profileImg: imgURL?.data.url,
         };
 
         const result = await signUp(data);
 
         if (result?.data?.statusCode == 200) {
+          toast.success("Welcome! Your account has been successfully created.");
           setSubmitting(false);
           router.push("/sign-in");
         }
       } else {
-        setDocumentError("Profile picture is required");
+        setState({ ...state, documentError: `${imgURL?.error?.message}` });
       }
     } catch (error) {
+      toast.error("Oops! Something went wrong. Please try again.");
       throw new Error("An unexpected error occurred:", error);
     }
   };
 
   const handlePicture = async (file) => {
-    setDocument(null);
-    setDocumentError("");
-    setDocument(file);
+    setState({ ...state, document: file, documentError: "" });
   };
 
   return (
@@ -102,9 +113,9 @@ const SignUpPage = () => {
                   showIcon
                 />
                 <FileUpload
-                  document={document}
+                  document={state?.document}
                   handlePicture={handlePicture}
-                  documentError={documentError}
+                  documentError={state?.documentError}
                 />
                 <SpinnerButton isLoading={isLoading} title="Sign Up" />
               </Form>

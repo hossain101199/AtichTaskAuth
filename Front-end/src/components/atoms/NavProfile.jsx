@@ -39,14 +39,15 @@ const NavProfile = () => {
         )}
       </button>
       <Card
-        className={`p-5 absolute z-50 end-0 top-[53px] flex flex-col gap-3 justify-start w-28 ${
+        className={`py-5 absolute z-50 end-0 top-[53px] flex flex-col gap-3 justify-start w-28 hover:shadow-md ${
           isProfileOn ? "block" : "hidden"
         }`}
       >
-        <Link href="/profile" className="w-fit">
+        <Link href="/profile" className="w-fit px-5">
           <Paragraph className="font-bold">Profile</Paragraph>
         </Link>
-        <button onClick={handleSignOut} className="w-fit">
+        <hr />
+        <button onClick={handleSignOut} className="w-fit px-5">
           <Paragraph className="text-danger font-bold">Sign Out</Paragraph>
         </button>
       </Card>
