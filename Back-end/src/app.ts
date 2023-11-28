@@ -6,15 +6,7 @@ import routes from './app/routes';
 
 const app: Application = express();
 
-app.use(
-  cors({
-    origin:
-      'http://localhost:3000' ||
-      'https://taskpro-git-main-hossain101199.vercel.app' ||
-      'https://taskpro-hossain101199.vercel.app' ||
-      'https://taskpro-swart.vercel.app',
-  })
-);
+app.use(cors());
 
 app.use(cookieParser());
 // parser

@@ -39,7 +39,7 @@ const SignUpPage = () => {
         return;
       }
 
-      formData.append("image", document);
+      formData.append("image", state.document);
 
       const imgURL = await imageUpload(formData);
 
