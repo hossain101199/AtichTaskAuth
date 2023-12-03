@@ -1,4 +1,4 @@
-import { getBaseUrl } from "@/config/envConfig";
+import { getBaseUrl } from "@/helper/config/envConfig";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const API = createApi({
@@ -7,6 +7,7 @@ export const API = createApi({
     baseUrl: `${getBaseUrl()}/api/v1`,
   }),
 
-  tagTypes: [],
+  tagTypes: ["profileUpdated"],
+
   endpoints: () => ({}),
 });

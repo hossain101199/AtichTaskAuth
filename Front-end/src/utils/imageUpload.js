@@ -1,4 +1,4 @@
-import { getImageBBKey } from "@/config/envConfig";
+import { getImageBBKey } from "@/helper/config/envConfig";
 import toast from "react-hot-toast";
 
 const imageUpload = async (formData) => {

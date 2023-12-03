@@ -1,6 +1,6 @@
+import { changePasswordInitialValues } from "@/helper/initialValues/changePasswordInitialValues";
+import { changePasswordValidationSchema } from "@/helper/validationSchemas/changePasswordValidationSchema";
 import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
-import { changePasswordInitialValues } from "@/utils/initialValues/changePasswordInitialValues";
-import { changePasswordValidationSchema } from "@/utils/validationSchemas/changePasswordValidationSchema";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";

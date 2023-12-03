@@ -1,20 +1,19 @@
 import Container from "@/components/atoms/Container";
 import NavProfile from "@/components/atoms/NavProfile";
+import { isLoggedIn } from "@/utils/auth.service";
 import Image from "next/image";
 import Link from "next/link";
-import { useSelector } from "react-redux";
 import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
-  const { name } = useSelector((state) => state.auth);
-
+  const isUserLoggedIn = isLoggedIn();
   return (
     <nav>
       <Container className="flex justify-between items-center">
         <Link href="/">
           <Image src={logo} alt="logo" width={100}></Image>
         </Link>
-        {name ? (
+        {isUserLoggedIn ? (
           <NavProfile />
         ) : (
           <Link

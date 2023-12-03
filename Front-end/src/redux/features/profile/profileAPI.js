@@ -1,4 +1,4 @@
-import { getAccessToken } from "@/utils/cookies";
+import { getAccessToken } from "@/utils/auth.service";
 
 const { API } = require("@/redux/api/apiSlice");
 
@@ -9,8 +9,18 @@ const profileAPI = API.injectEndpoints({
         url: `/profile`,
         headers: { Authorization: `${getAccessToken()}` },
       }),
+      providesTags: ["profileUpdated"],
+    }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: `/profile`,
+        method: "PATCH",
+        headers: { Authorization: `${getAccessToken()}` },
+        body: data,
+      }),
+      invalidatesTags: ["profileUpdated"],
     }),
   }),
 });
 
-export const { useGetProfileQuery } = profileAPI;
+export const { useGetProfileQuery, useUpdateProfileMutation } = profileAPI;

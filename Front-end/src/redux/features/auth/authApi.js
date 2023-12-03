@@ -1,5 +1,5 @@
-import { setAccessToken } from "@/utils/cookies";
-import { setStoredData } from "@/utils/localStorage";
+import { setAccessToken, storeUserInfo } from "@/utils/auth.service";
+
 const { API } = require("@/redux/api/apiSlice");
 
 const authAPIs = API.injectEndpoints({
@@ -20,8 +20,8 @@ const authAPIs = API.injectEndpoints({
       }),
       transformResponse: (response) => {
         if (response?.statusCode == 200) {
-          setAccessToken(response.data.accessToken, { path: "/" });
-          setStoredData("user", {
+          setAccessToken(response.data.accessToken);
+          storeUserInfo({
             name: response.data.name,
             role: response.data.role,
             profileImg: response.data.profileImg,

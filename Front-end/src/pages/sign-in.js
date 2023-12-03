@@ -4,24 +4,20 @@ import Error from "@/components/atoms/Error";
 import InputField from "@/components/atoms/InputFeild";
 import LHeading from "@/components/atoms/LHeading";
 import SpinnerButton from "@/components/atoms/SpinnerButton";
+import { initialValues } from "@/helper/initialValues/signInInitialValues";
+import { validationSchema } from "@/helper/validationSchemas/signInValidationSchema";
 import Navbar from "@/layout/Navbar";
 import { useSignInMutation } from "@/redux/features/auth/authApi";
-import { setCredentials } from "@/redux/features/auth/authSlice";
-import { initialValues } from "@/utils/initialValues/signInInitialValues";
-import { validationSchema } from "@/utils/validationSchemas/signInValidationSchema";
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [signIn, { isLoading, error, isError }] = useSignInMutation();
-
-  const dispatch = useDispatch();
 
   const router = useRouter();
 
@@ -31,13 +27,6 @@ const SignInPage = () => {
 
       if (result?.data.statusCode == 200) {
         toast.success("Welcome back! You've successfully logged in.");
-        dispatch(
-          setCredentials({
-            name: result?.data?.data.name,
-            role: result?.data?.data.role,
-            profileImg: result?.data?.data.profileImg,
-          })
-        );
         setSubmitting(false);
         router.push("/");
       }
