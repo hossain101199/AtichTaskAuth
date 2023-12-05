@@ -1,6 +1,5 @@
+import { API } from "@/redux/api/apiSlice";
 import { setAccessToken, storeUserInfo } from "@/utils/auth.service";
-
-const { API } = require("@/redux/api/apiSlice");
 
 const authAPIs = API.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,7 +7,7 @@ const authAPIs = API.injectEndpoints({
       query: (data) => ({
         url: `/auth/signup`,
         method: "POST",
-        body: data,
+        data,
       }),
     }),
 
@@ -16,8 +15,9 @@ const authAPIs = API.injectEndpoints({
       query: (data) => ({
         url: `/auth/signin`,
         method: "POST",
-        body: data,
+        data,
       }),
+
       transformResponse: (response) => {
         if (response?.statusCode == 200) {
           setAccessToken(response.data.accessToken);
@@ -35,7 +35,7 @@ const authAPIs = API.injectEndpoints({
       query: (data) => ({
         url: `/auth/change-password`,
         method: "POST",
-        body: data,
+        data,
       }),
     }),
   }),
