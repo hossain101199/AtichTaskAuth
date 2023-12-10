@@ -1,6 +1,6 @@
-import axiosBaseQuery from "@/helper/axios/axiosBaseQuery";
-import { getBaseUrl } from "@/helper/config/envConfig";
 import { createApi } from "@reduxjs/toolkit/query/react";
+import axiosBaseQuery from "../../helper/axios/axiosBaseQuery";
+import { getBaseUrl } from "../../helper/config/envConfig";
 
 export const API = createApi({
   reducerPath: "api",

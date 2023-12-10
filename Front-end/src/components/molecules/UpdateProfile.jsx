@@ -1,15 +1,15 @@
-import EditIcon from "@/assets/svgs/EditIcon";
-import UploadIcon from "@/assets/svgs/UploadIcon";
-import { updateProfileValidationSchema } from "@/helper/validationSchemas/updateProfileValidationSchema";
-import { useUpdateProfileMutation } from "@/redux/features/profile/profileAPI";
-import { getUserInfo, storeUserInfo } from "@/utils/auth.service";
-import imageUpload from "@/utils/imageUpload";
 import { Form, Formik } from "formik";
-import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import EditIcon from "../../assets/svgs/EditIcon";
+import UploadIcon from "../../assets/svgs/UploadIcon";
+import { updateProfileValidationSchema } from "../../pages/ProfilePage/InitialValuesAndValidationSchema/updateProfileValidationSchema";
+import { useUpdateProfileMutation } from "../../redux/features/profile/profileAPI";
+import { getUserInfo, storeUserInfo } from "../../utils/auth.service";
+import imageUpload from "../../utils/imageUpload";
 import Card from "../atoms/Card";
 import Error from "../atoms/Error";
+import Image from "../atoms/Image";
 import InputField from "../atoms/InputFeild";
 import MHeading from "../atoms/MHeading";
 import SpinnerButton from "../atoms/SpinnerButton";
@@ -92,7 +92,7 @@ const UpdateProfile = ({ profile }) => {
   };
 
   return (
-    <div className="flex flex-col gap-5 lg:w-[672px]">
+    <>
       <MHeading>Profile</MHeading>
       <Card className="p-5 flex flex-col gap-5 hover:shadow-md">
         <div className="flex justify-between items-center">
@@ -109,50 +109,36 @@ const UpdateProfile = ({ profile }) => {
         >
           {({ isSubmitting }) => (
             <fieldset disabled={isSubmitting || isLoading}>
-              <Form className="flex flex-col gap-5">
-                <div className="flex flex-col lg:flex-row gap-5 items-center">
-                  {profile?.data?.profileImg && (
-                    <div className="relative ">
-                      <Image
-                        className="rounded-full"
-                        width={160}
-                        height={160}
-                        sizes="100vw"
-                        src={
-                          state?.document
-                            ? URL.createObjectURL(state?.document)
-                            : profile?.data?.profileImg
-                        }
-                        alt=""
-                      />
-                      {isEdit && (
-                        <label className="w-8 h-8 backdrop-blur-xl flex justify-center items-center rounded-xl border-[1px] border-white absolute bottom-[10px] right-[10px]">
-                          <UploadIcon />
-                          <input
-                            type="file"
-                            accept=".jpg, .jpeg, .png"
-                            className="hidden"
-                            onChange={(e) => handlePicture(e.target.files[0])}
-                          />
-                        </label>
-                      )}
-                    </div>
-                  )}
-                  {isEdit ? (
-                    <div className="w-full lg:w-1/2">
-                      <InputField
-                        name="name"
-                        type="text"
-                        placeholder="Full Name"
+              <Form className="flex flex-col md:flex-row gap-5">
+                <div className="relative rounded-lg border md:w-5/12 h-fit overflow-hidden">
+                  <Image
+                    className="rounded-lg h-full"
+                    src={
+                      state?.document
+                        ? URL.createObjectURL(state?.document)
+                        : profile?.data?.profileImg
+                    }
+                    alt=""
+                  />
+                  {isEdit && (
+                    <div className="w-8 h-8 backdrop-blur-xl flex justify-center items-center rounded-lg border-[1px] border-white absolute bottom-0 right-0">
+                      <UploadIcon />
+                      <input
+                        type="file"
+                        accept=".jpg, .jpeg, .png"
+                        className="hidden"
+                        onChange={(e) => handlePicture(e.target.files[0])}
                       />
                     </div>
-                  ) : (
-                    <XLParagraph className="font-bold">
-                      {profile?.data?.name}
-                    </XLParagraph>
                   )}
                 </div>
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-5 border md:w-9/12">
+                  <InputField
+                    name="name"
+                    type="text"
+                    placeholder="Full Name"
+                    disabled={!isEdit}
+                  />
                   <InputField
                     name="email"
                     type="email"
@@ -180,7 +166,7 @@ const UpdateProfile = ({ profile }) => {
           )}
         </Formik>
       </Card>
-    </div>
+    </>
   );
 };
 

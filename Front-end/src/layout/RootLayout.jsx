@@ -1,4 +1,5 @@
-import Container from "@/components/atoms/Container";
+import Container from "../components/atoms/Container";
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const RootLayout = ({ children }) => {
@@ -6,6 +7,7 @@ const RootLayout = ({ children }) => {
     <>
       <Navbar />
       <Container>{children}</Container>
+      <Footer />
     </>
   );
 };

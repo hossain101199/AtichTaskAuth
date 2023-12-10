@@ -1,4 +1,4 @@
-export const initialValues = {
+export const signUpInitialValues = {
   name: "",
   email: "",
   contactNo: "",

@@ -1,5 +1,5 @@
-import { API } from "@/redux/api/apiSlice";
-import { setAccessToken, storeUserInfo } from "@/utils/auth.service";
+import { setAccessToken, storeUserInfo } from "../../../utils/auth.service";
+import { API } from "../../api/apiSlice";
 
 const authAPIs = API.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,6 +1,6 @@
-import EyeIcon from "@/assets/svgs/EyeIcon";
-import HideIcon from "@/assets/svgs/HideIcon";
 import { useField } from "formik";
+import EyeIcon from "../../assets/svgs/EyeIcon";
+import HideIcon from "../../assets/svgs/HideIcon";
 
 const InputField = ({
   showIcon = false,

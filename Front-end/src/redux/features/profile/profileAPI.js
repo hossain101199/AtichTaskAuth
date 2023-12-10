@@ -1,4 +1,4 @@
-import { API } from "@/redux/api/apiSlice";
+import { API } from "../../api/apiSlice";
 
 const profileAPI = API.injectEndpoints({
   endpoints: (builder) => ({

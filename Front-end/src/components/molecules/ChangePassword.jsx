@@ -1,9 +1,9 @@
-import { changePasswordInitialValues } from "@/helper/initialValues/changePasswordInitialValues";
-import { changePasswordValidationSchema } from "@/helper/validationSchemas/changePasswordValidationSchema";
-import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { changePasswordInitialValues } from "../../pages/ProfilePage/InitialValuesAndValidationSchema/changePasswordInitialValues";
+import { changePasswordValidationSchema } from "../../pages/ProfilePage/InitialValuesAndValidationSchema/changePasswordValidationSchema";
+import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
 import Card from "../atoms/Card";
 import Error from "../atoms/Error";
 import InputField from "../atoms/InputFeild";
@@ -41,7 +41,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 lg:w-[672px]">
+    <>
       <MHeading>Security</MHeading>
       <Card className="p-5 flex flex-col gap-5 hover:shadow-md">
         <XLParagraph className="font-bold">CHANGE PASSWORD</XLParagraph>
@@ -90,7 +90,7 @@ const ChangePassword = () => {
           )}
         </Formik>
       </Card>
-    </div>
+    </>
   );
 };
 

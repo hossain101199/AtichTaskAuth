@@ -1,4 +1,4 @@
-import UploadIcon from "@/assets/svgs/UploadIcon";
+import UploadIcon from "../../assets/svgs/UploadIcon";
 
 const FileUpload = ({ handlePicture, document, documentError }) => {
   return (

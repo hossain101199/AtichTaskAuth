@@ -1,8 +1,8 @@
-import Image from "next/image";
-import banner from "../../../public/UnderConstructionPoster.png";
+import Image from "../atoms/Image";
+import banner from "/UnderConstructionPoster.png";
 
 const Banner = () => {
-  return <Image alt="banner" src={banner} />;
+  return <Image src={banner} alt="banner" />;
 };
 
 export default Banner;

@@ -1,4 +1,4 @@
-import { tokenKey, userKey } from "@/helper/config/envConfig";
+import { tokenKey, userKey } from "../helper/config/envConfig";
 import {
   getStoredData,
   removeStorageData,

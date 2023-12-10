@@ -1,13 +1,12 @@
+import { useEffect, useRef, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   getUserInfo,
   removeAccessToken,
   removeUserInfo,
-} from "@/utils/auth.service";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+} from "../../utils/auth.service";
 import Card from "./Card";
+import Image from "./Image";
 import Paragraph from "./Paragraph";
 
 const NavProfile = () => {
@@ -15,7 +14,7 @@ const NavProfile = () => {
 
   const [isProfileOn, setProfileOn] = useState(false);
 
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const cardRef = useRef(null);
 
@@ -40,19 +39,17 @@ const NavProfile = () => {
   const handleSignOut = () => {
     removeUserInfo();
     removeAccessToken();
-    router.push("/");
+    navigate("/");
   };
 
   return (
-    <div className="relative" ref={cardRef}>
-      <button onClick={handleProfile}>
+    <div className="relative">
+      <button onClick={handleProfile} ref={cardRef}>
         {userData?.profileImg && (
           <Image
-            className="rounded-full"
-            width={40}
-            height={40}
+            className="h-10 w-10 rounded-full"
             src={userData?.profileImg}
-            alt=""
+            alt="user profile icon"
           />
         )}
       </button>
@@ -62,9 +59,9 @@ const NavProfile = () => {
           isProfileOn ? "block" : "hidden"
         }`}
       >
-        <Link href="/profile" className="w-fit px-5">
+        <NavLink to="/profile" className="w-fit px-5">
           <Paragraph className="font-bold">Profile</Paragraph>
-        </Link>
+        </NavLink>
         <hr />
         <button onClick={handleSignOut} className="w-fit px-5">
           <Paragraph className="text-danger font-bold">Sign Out</Paragraph>
