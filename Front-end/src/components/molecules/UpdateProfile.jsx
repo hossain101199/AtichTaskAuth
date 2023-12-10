@@ -109,8 +109,8 @@ const UpdateProfile = ({ profile }) => {
         >
           {({ isSubmitting }) => (
             <fieldset disabled={isSubmitting || isLoading}>
-              <Form className="flex flex-col md:flex-row gap-5">
-                <div className="relative rounded-lg border md:w-5/12 h-fit overflow-hidden">
+              <Form className="flex flex-col sm:flex-row gap-5">
+                <div className="relative rounded-lg w-40 sm:w-5/12 h-fit overflow-hidden">
                   <Image
                     className="rounded-lg h-full"
                     src={
@@ -132,7 +132,7 @@ const UpdateProfile = ({ profile }) => {
                     </div>
                   )}
                 </div>
-                <div className="flex flex-col gap-5 border md:w-9/12">
+                <div className="flex flex-col gap-5 sm:w-9/12">
                   <InputField
                     name="name"
                     type="text"
@@ -156,7 +156,7 @@ const UpdateProfile = ({ profile }) => {
                       <SpinnerButton
                         isLoading={isSubmitting || isLoading}
                         title="Save Changes"
-                        className="w-full md:w-36 "
+                        className="w-full sm:w-36 "
                       />
                     </div>
                   )}

@@ -1,3 +1,4 @@
+import Container from "../../components/atoms/Container";
 import Spinner from "../../components/atoms/Spinner";
 import ChangePassword from "../../components/molecules/ChangePassword";
 import UpdateProfile from "../../components/molecules/UpdateProfile";
@@ -11,12 +12,12 @@ const Profile = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="flex justify-center">
-          <div className="flex flex-col gap-5 lg:w-[672px]">
+        <Container className="flex justify-center">
+          <div className="flex flex-col gap-5 w-full md:w-[672px]">
             <UpdateProfile profile={profile} />
             <ChangePassword />
           </div>
-        </div>
+        </Container>
       )}
     </>
   );

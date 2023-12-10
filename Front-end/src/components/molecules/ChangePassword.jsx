@@ -82,7 +82,7 @@ const ChangePassword = () => {
                   <SpinnerButton
                     isLoading={isLoading || isSubmitting}
                     title="Save Changes"
-                    className="w-full md:w-36 "
+                    className="w-full sm:w-36 "
                   />
                 </div>
               </Form>
