@@ -1,19 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setLoggedInUserInfo } from "../../redux/features/auth/authSlice";
-import {
-  getUserInfo,
-  removeAccessToken,
-  removeUserInfo,
-} from "../../utils/auth.service";
+import { removeAccessToken, removeUserInfo } from "../../utils/auth.service";
 import Card from "./Card";
 import Image from "./Image";
 import Paragraph from "./Paragraph";
 
 const NavProfile = () => {
-  const userData = getUserInfo();
+  const { profileImg } = useSelector((state) => state.auth);
 
   const [isProfileOn, setProfileOn] = useState(false);
 
@@ -59,13 +55,11 @@ const NavProfile = () => {
   return (
     <div className="relative">
       <button onClick={handleProfile} ref={cardRef}>
-        {userData?.profileImg && (
-          <Image
-            className="h-10 w-10 rounded-full"
-            src={userData?.profileImg}
-            alt="user profile icon"
-          />
-        )}
+        <Image
+          className="h-10 w-10 rounded-full"
+          src={profileImg}
+          alt="user profile icon"
+        />
       </button>
 
       <Card
