@@ -14,6 +14,7 @@ const InputField = ({
       <div className="flex rounded-lg p-3 w-full bg-ghostwhite">
         <input
           className="outline-0 w-full text-sm font-medium bg-ghostwhite placeholder:text-slategray"
+          autoComplete="true"
           {...field}
           {...props}
         />

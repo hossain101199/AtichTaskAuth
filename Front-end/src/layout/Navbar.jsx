@@ -1,12 +1,12 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import Container from "../components/atoms/Container";
 import Image from "../components/atoms/Image";
 import NavProfile from "../components/atoms/NavProfile";
-import { isLoggedIn } from "../utils/auth.service";
 
 const Navbar = () => {
-  const isUserLoggedIn = isLoggedIn();
+  const { accessToken } = useSelector((state) => state.auth);
 
   return (
     <nav>
@@ -14,7 +14,7 @@ const Navbar = () => {
         <NavLink to="/">
           <Image src={logo} alt="logo" width={100} />
         </NavLink>
-        {isUserLoggedIn ? (
+        {accessToken ? (
           <NavProfile />
         ) : (
           <NavLink

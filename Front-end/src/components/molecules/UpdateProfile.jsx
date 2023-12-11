@@ -112,7 +112,7 @@ const UpdateProfile = ({ profile }) => {
               <Form className="flex flex-col sm:flex-row gap-5">
                 <div className="relative rounded-lg w-40 sm:w-5/12 h-fit overflow-hidden">
                   <Image
-                    className="rounded-lg h-full"
+                    className="rounded-lg"
                     src={
                       state?.document
                         ? URL.createObjectURL(state?.document)
@@ -121,7 +121,7 @@ const UpdateProfile = ({ profile }) => {
                     alt=""
                   />
                   {isEdit && (
-                    <div className="w-8 h-8 backdrop-blur-xl flex justify-center items-center rounded-lg border-[1px] border-white absolute bottom-0 right-0">
+                    <label className="cursor-pointer w-8 h-8 backdrop-blur-xl flex justify-center items-center rounded-lg border-[1px] border-white absolute bottom-1 right-1">
                       <UploadIcon />
                       <input
                         type="file"
@@ -129,7 +129,7 @@ const UpdateProfile = ({ profile }) => {
                         className="hidden"
                         onChange={(e) => handlePicture(e.target.files[0])}
                       />
-                    </div>
+                    </label>
                   )}
                 </div>
                 <div className="flex flex-col gap-5 sm:w-9/12">

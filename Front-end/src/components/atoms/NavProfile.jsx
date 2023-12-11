@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { setLoggedInUserInfo } from "../../redux/features/auth/authSlice";
 import {
   getUserInfo,
   removeAccessToken,
@@ -36,9 +39,20 @@ const NavProfile = () => {
     };
   }, []);
 
+  const dispatch = useDispatch();
+
   const handleSignOut = () => {
+    dispatch(
+      setLoggedInUserInfo({
+        accessToken: null,
+        name: null,
+        role: null,
+        profileImg: null,
+      })
+    );
     removeUserInfo();
     removeAccessToken();
+    toast.success("Successfully signed out");
     navigate("/");
   };
 

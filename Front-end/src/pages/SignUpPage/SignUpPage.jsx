@@ -116,7 +116,10 @@ const SignUpPage = () => {
                     handlePicture={handlePicture}
                     documentError={state?.documentError}
                   />
-                  <SpinnerButton isLoading={isLoading} title="Sign Up" />
+                  <SpinnerButton
+                    isLoading={isLoading || isSubmitting}
+                    title="Sign Up"
+                  />
                 </Form>
               </fieldset>
             )}

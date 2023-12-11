@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/atoms/Card";
 import Container from "../../components/atoms/Container";
@@ -9,6 +10,7 @@ import InputField from "../../components/atoms/InputFeild";
 import LHeading from "../../components/atoms/LHeading";
 import SpinnerButton from "../../components/atoms/SpinnerButton";
 import { useSignInMutation } from "../../redux/features/auth/authApi";
+import { setLoggedInUserInfo } from "../../redux/features/auth/authSlice";
 import { initialValues } from "./InitialValuesAndValidationSchema/signInInitialValues";
 import { validationSchema } from "./InitialValuesAndValidationSchema/signInValidationSchema";
 
@@ -17,13 +19,23 @@ const SignInPage = () => {
 
   const [signIn, { isLoading, error, isError }] = useSignInMutation();
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const result = await signIn(values);
+      const result = await signIn(values).unwrap();
 
-      if (result?.data.statusCode == 200) {
+      if (result?.statusCode == 200) {
+        dispatch(
+          setLoggedInUserInfo({
+            accessToken: result?.data?.accessToken,
+            name: result?.data?.name,
+            role: result?.data?.role,
+            profileImg: result?.data?.profileImg,
+          })
+        );
         toast.success("Welcome back! You've successfully logged in.");
         setSubmitting(false);
         navigate("/");
