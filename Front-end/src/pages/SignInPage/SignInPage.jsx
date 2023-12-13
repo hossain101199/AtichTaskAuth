@@ -38,7 +38,7 @@ const SignInPage = () => {
         );
         toast.success("Welcome back! You've successfully logged in.");
         setSubmitting(false);
-        navigate("/");
+        navigate("/dashboard");
       }
     } catch (error) {
       toast.error("Oops! Something went wrong. Please try again.");

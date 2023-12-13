@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setLoggedInUserInfo } from "../../redux/features/auth/authSlice";
 import { removeAccessToken, removeUserInfo } from "../../utils/auth.service";
 import Card from "./Card";
@@ -53,8 +53,8 @@ const NavProfile = () => {
   };
 
   return (
-    <div className="relative">
-      <button onClick={handleProfile} ref={cardRef}>
+    <div className="relative flex">
+      <button onClick={handleProfile} ref={cardRef} className="click-animation">
         <Image
           className="h-10 w-10 rounded-full"
           src={profileImg}
@@ -67,10 +67,14 @@ const NavProfile = () => {
           isProfileOn ? "block" : "hidden"
         }`}
       >
-        <NavLink to="/profile" className="w-fit px-5">
+        <Link to="/profile" className="w-fit px-5">
           <Paragraph className="font-bold">Profile</Paragraph>
-        </NavLink>
+        </Link>
         <hr />
+        {/* <Link to="/billing" className="w-fit px-5">
+          <Paragraph className="font-bold">Billing</Paragraph>
+        </Link>
+        <hr /> */}
         <button onClick={handleSignOut} className="w-fit px-5">
           <Paragraph className="text-danger font-bold">Sign Out</Paragraph>
         </button>

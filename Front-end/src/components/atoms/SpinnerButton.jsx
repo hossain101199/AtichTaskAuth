@@ -2,7 +2,7 @@ const SpinnerButton = ({ isLoading, title = "", className = "w-full" }) => {
   return (
     <button
       disabled={isLoading}
-      className={`bg-action rounded-lg p-3 text-white font-semibold flex justify-center items-center ${className}`}
+      className={`bg-action rounded-lg p-3 text-white font-semibold flex justify-center items-center click-animation ${className}`}
       type="submit"
     >
       {isLoading ? (

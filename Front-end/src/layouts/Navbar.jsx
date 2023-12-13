@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import Container from "../components/atoms/Container";
 import Image from "../components/atoms/Image";
-import NavProfile from "../components/atoms/NavProfile";
+import NavigationLink from "../components/atoms/NavigationLink";
+import AuthenticatedNavbar from "../components/molecules/AuthenticatedNavbar";
 
 const Navbar = () => {
   const { accessToken } = useSelector((state) => state.auth);
@@ -11,18 +12,13 @@ const Navbar = () => {
   return (
     <nav>
       <Container className="flex justify-between items-center">
-        <NavLink to="/">
+        <Link to="/">
           <Image src={logo} alt="logo" width={100} />
-        </NavLink>
+        </Link>
         {accessToken ? (
-          <NavProfile />
+          <AuthenticatedNavbar />
         ) : (
-          <NavLink
-            to="sign-in"
-            className="px-5 py-2 w-fit font-medium text-[#353945]"
-          >
-            Sign In
-          </NavLink>
+          <NavigationLink to="sign-in">Sign In</NavigationLink>
         )}
       </Container>
     </nav>

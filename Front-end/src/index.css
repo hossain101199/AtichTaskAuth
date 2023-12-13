@@ -23,3 +23,11 @@
 .modal-open .modal-overlay {
   pointer-events: auto;
 }
+
+nav .active {
+  @apply bg-action text-white;
+}
+
+.click-animation {
+  @apply transform active:scale-105 transition-transform;
+}

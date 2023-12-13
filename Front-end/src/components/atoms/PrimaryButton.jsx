@@ -1,7 +1,8 @@
-const PrimaryButton = ({ children, className = "" }) => {
+const PrimaryButton = ({ children, onClick, className = "" }) => {
   return (
     <button
-      className={`bg-action rounded-lg text-white font-semibold p-3 ${className}`}
+      onClick={onClick}
+      className={`bg-action rounded-lg text-white font-semibold p-3 click-animation ${className}`}
       type="submit"
     >
       {children}

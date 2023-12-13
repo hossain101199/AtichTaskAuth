@@ -1,13 +1,9 @@
-import HomePage from "../pages/HomePage";
+import NotFoundPage from "../pages/NotFoundPage";
 import Profile from "../pages/ProfilePage/ProfilePage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 
 export const routes = [
-  {
-    path: "/",
-    element: HomePage,
-  },
   {
     path: "/sign-in",
     element: SignInPage,
@@ -19,5 +15,9 @@ export const routes = [
   {
     path: "/profile",
     element: Profile,
+  },
+  {
+    path: "*",
+    element: NotFoundPage,
   },
 ];
