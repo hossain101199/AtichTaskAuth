@@ -6,7 +6,7 @@ export default {
       colors: {
         slategray: "#777E90",
         ghostwhite: "#F5F6FA",
-        darkblue: "#0A2540",
+        darkblue: "#264180",
         action: "#FF4000",
         mercury: "#E6E8EC",
 

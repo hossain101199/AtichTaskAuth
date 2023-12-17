@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.png";
+
+import AitchTaskLogo from "../assets/svgs/AitchTaskLogo";
 import Container from "../components/atoms/Container";
-import Image from "../components/atoms/Image";
 import NavigationLink from "../components/atoms/NavigationLink";
 import AuthenticatedNavbar from "../components/molecules/AuthenticatedNavbar";
 
@@ -13,7 +13,7 @@ const Navbar = () => {
     <nav>
       <Container className="flex justify-between items-center">
         <Link to="/">
-          <Image src={logo} alt="logo" width={100} />
+          <AitchTaskLogo className="h-10 w-fit" />
         </Link>
         {accessToken ? (
           <AuthenticatedNavbar />

@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 // Testing
 app.get('/', async (req: Request, res: Response) => {
   // throw new Error('Testing error logger')
-  res.send('Hello from TaskPro');
+  res.send('Hello from AitchTask');
 });
 
 // Application routes

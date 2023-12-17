@@ -63,7 +63,7 @@ const NavProfile = () => {
       </button>
 
       <Card
-        className={`py-5 absolute z-50 end-0 top-[53px] flex flex-col gap-3 justify-start w-28 hover:shadow-md ${
+        className={`py-5 absolute z-50 end-0 top-[53px] flex flex-col gap-4 justify-start w-28 hover:shadow-md ${
           isProfileOn ? "block" : "hidden"
         }`}
       >
