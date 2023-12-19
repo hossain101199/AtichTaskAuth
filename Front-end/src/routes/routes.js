@@ -21,3 +21,5 @@ export const routes = [
     element: NotFoundPage,
   },
 ];
+
+export const excludeFooterPaths = ["/dashboard", "/profile"];

@@ -13,7 +13,11 @@ const Footer = () => {
         <div className="flex flex-col gap-4">
           <LParagraph className="font-semibold uppercase">Developer</LParagraph>
           <Paragraph>{developerInfo.name}</Paragraph>
-          <Link to={developerInfo.email.contactURL} target="_blank">
+          <Link
+            to={developerInfo.email.contactURL}
+            target="_blank"
+            className="w-fit h-fit"
+          >
             <Paragraph>{developerInfo.email.urlTitle}</Paragraph>
           </Link>
           <Paragraph>{developerInfo.phone}</Paragraph>
