@@ -1,11 +1,12 @@
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import EditIcon from "../../assets/svgs/EditIcon";
 import UploadIcon from "../../assets/svgs/UploadIcon";
 import { updateProfileValidationSchema } from "../../pages/ProfilePage/InitialValuesAndValidationSchema/updateProfileValidationSchema";
+import { setLoggedInUserInfo } from "../../redux/features/auth/authSlice";
 import { useUpdateProfileMutation } from "../../redux/features/profile/profileAPI";
-import { getUserInfo, storeUserInfo } from "../../utils/auth.service";
 import imageUpload from "../../utils/imageUpload";
 import Card from "../atoms/Card";
 import Error from "../atoms/Error";
@@ -22,8 +23,6 @@ const UpdateProfile = ({ profile }) => {
     documentError: "",
   });
 
-  const userData = getUserInfo();
-
   const initialValues = {
     name: profile?.data.name,
     email: profile?.data.email,
@@ -32,6 +31,8 @@ const UpdateProfile = ({ profile }) => {
 
   const [updateProfile, { isLoading, error, isError }] =
     useUpdateProfileMutation();
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (
     { name, email, contactNo },
@@ -66,11 +67,11 @@ const UpdateProfile = ({ profile }) => {
       const result = await updateProfile(updatedData)?.unwrap();
 
       if (result?.statusCode == 200) {
-        storeUserInfo({
-          ...userData,
-          name: result.data.name,
-          profileImg: result.data.profileImg,
-        });
+        dispatch(
+          setLoggedInUserInfo({
+            profileImg: result.data.profileImg,
+          })
+        );
         toast.success("Profile updated successfully!");
         setSubmitting(false);
         setIsEdit(!isEdit);

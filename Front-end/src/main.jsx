@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App.jsx";
-import AuthProvider from "./components/atoms/AuthProvider.jsx";
+import Spinner from "./components/atoms/Spinner.jsx";
 import "./index.css";
-import { store } from "./redux/store.js";
+import { persistor, store } from "./redux/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <AuthProvider>
+      <PersistGate loading={<Spinner />} persistor={persistor}>
         <App />
-      </AuthProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

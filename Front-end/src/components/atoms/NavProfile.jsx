@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { API } from "../../redux/api/apiSlice";
 import { setLoggedInUserInfo } from "../../redux/features/auth/authSlice";
-import { removeAccessToken, removeUserInfo } from "../../utils/auth.service";
+import { removeAccessToken } from "../../utils/auth.service";
 import Card from "./Card";
 import Image from "./Image";
 import Paragraph from "./Paragraph";
@@ -46,7 +47,15 @@ const NavProfile = () => {
         profileImg: null,
       })
     );
-    removeUserInfo();
+    dispatch(
+      setLoggedInUserInfo({
+        accessToken: null,
+        name: null,
+        role: null,
+        profileImg: null,
+      })
+    );
+    dispatch(API.util.resetApiState());
     removeAccessToken();
     toast.success("Successfully signed out");
     navigate("/");
@@ -67,7 +76,7 @@ const NavProfile = () => {
           isProfileOn ? "block" : "hidden"
         }`}
       >
-        <Link to="/profile" className="w-fit px-5">
+        <Link to="/profile" className="w-full px-5">
           <Paragraph className="font-bold">Profile</Paragraph>
         </Link>
         <hr />
@@ -75,7 +84,7 @@ const NavProfile = () => {
           <Paragraph className="font-bold">Billing</Paragraph>
         </Link>
         <hr /> */}
-        <button onClick={handleSignOut} className="w-fit px-5">
+        <button onClick={handleSignOut} className="w-full px-5">
           <Paragraph className="text-danger font-bold">Sign Out</Paragraph>
         </button>
       </Card>

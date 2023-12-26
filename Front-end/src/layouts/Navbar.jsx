@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Container className="flex justify-between items-center">
+      <Container className="flex justify-between items-center py-2">
         <Link to="/">
           <AitchTaskLogo className="h-10 w-fit" />
         </Link>

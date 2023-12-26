@@ -12,10 +12,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setLoggedInUserInfo: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.name = action.payload.name;
-      state.role = action.payload.role;
-      state.profileImg = action.payload.profileImg;
+      Object.assign(state, action.payload);
     },
   },
 });

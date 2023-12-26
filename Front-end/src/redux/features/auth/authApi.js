@@ -1,4 +1,4 @@
-import { setAccessToken, storeUserInfo } from "../../../utils/auth.service";
+import { setAccessToken } from "../../../utils/auth.service";
 import { API } from "../../api/apiSlice";
 
 const authAPIs = API.injectEndpoints({
@@ -21,11 +21,7 @@ const authAPIs = API.injectEndpoints({
       transformResponse: (response) => {
         if (response?.statusCode == 200) {
           setAccessToken(response.data.accessToken);
-          storeUserInfo({
-            name: response.data.name,
-            role: response.data.role,
-            profileImg: response.data.profileImg,
-          });
+
           return response;
         }
       },

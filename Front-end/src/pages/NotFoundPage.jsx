@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import image404 from "../assets/images/404.png";
 import barrier from "../assets/images/barrier.png";
@@ -12,6 +13,12 @@ const NotFoundPage = () => {
   const handleNavigate = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleNavigate();
+    }, 5000);
+  });
 
   return (
     <Container className="flex flex-col gap-5 items-center min-h-[90vh] justify-between">
