@@ -102,7 +102,15 @@ const UpdateProfile = ({ profile }) => {
             <EditIcon />
           </button>
         </div>
-        {isError && <Error error={error?.data?.message} />}
+        {isError && (
+          <Error
+            error={
+              error?.data?.message
+                ? error?.data?.message
+                : "Oops! Something went wrong. Please try again."
+            }
+          />
+        )}
         <Formik
           onSubmit={handleSubmit}
           initialValues={initialValues}

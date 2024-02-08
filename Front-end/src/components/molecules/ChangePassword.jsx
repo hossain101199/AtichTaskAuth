@@ -45,7 +45,15 @@ const ChangePassword = () => {
       <MHeading>Security</MHeading>
       <Card className="p-5 flex flex-col gap-5 hover:shadow-md">
         <XLParagraph className="font-bold">CHANGE PASSWORD</XLParagraph>
-        {isError && <Error error={error?.data?.message} />}
+        {isError && (
+          <Error
+            error={
+              error?.data?.message
+                ? error?.data?.message
+                : "Oops! Something went wrong. Please try again."
+            }
+          />
+        )}
         <Formik
           onSubmit={handleChangePassword}
           initialValues={changePasswordInitialValues}

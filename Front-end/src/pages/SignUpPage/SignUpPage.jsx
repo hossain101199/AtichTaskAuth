@@ -75,7 +75,15 @@ const SignUpPage = () => {
       <Container className="flex justify-center items-center">
         <Card className="mt-[50px] mb-[50px] p-[30px] sm:p-[50px] max-w-md w-full shadow-lg flex flex-col gap-5">
           <LHeading className="text-center">Sign Up</LHeading>
-          {isError && <Error error={error?.data?.message} />}
+          {isError && (
+            <Error
+              error={
+                error?.data?.message
+                  ? error?.data?.message
+                  : "Oops! Something went wrong. Please try again."
+              }
+            />
+          )}
           <Formik
             onSubmit={handleSubmit}
             initialValues={signUpInitialValues}
