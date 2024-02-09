@@ -47,18 +47,10 @@ const NavProfile = () => {
         profileImg: null,
       })
     );
-    dispatch(
-      setLoggedInUserInfo({
-        accessToken: null,
-        name: null,
-        role: null,
-        profileImg: null,
-      })
-    );
     dispatch(API.util.resetApiState());
     removeAccessToken();
     toast.success("Successfully signed out");
-    navigate("/");
+    navigate("/sign-in");
   };
 
   return (
