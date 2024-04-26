@@ -12,3 +12,4 @@ const pick = <T extends object, K extends keyof T>(
 };
 
 export default pick;
+
