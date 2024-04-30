@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User, UserRole } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 import config from '../../../config';
@@ -18,7 +18,7 @@ const createUserInDB = async (payload: User): Promise<IUser> => {
     Number(config.bcrypt_salt_rounds)
   );
 
-  // payload.role = UserRole.ADMIN;
+  payload.role = UserRole.ADMIN;
 
   const createdUser = await prisma.user.create({
     data: payload,
