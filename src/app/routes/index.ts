@@ -4,6 +4,7 @@ import { priorityRoutes } from '../modules/priority/priority.route';
 import { profileRoutes } from '../modules/profile/profile.route';
 import { taskStatusRoutes } from '../modules/taskStatus/taskStatus.route';
 import { userRoutes } from '../modules/user/user.route';
+import { roleRoutes } from '../modules/role/role.route';
 
 const routes = express.Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: '/task-status',
     route: taskStatusRoutes,
+  },
+  {
+    path: '/roles',
+    route: roleRoutes,
   },
 ];
 
