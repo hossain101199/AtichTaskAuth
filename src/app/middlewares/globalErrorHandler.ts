@@ -15,11 +15,11 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   config.env === 'development'
     ? // eslint-disable-next-line no-console
       console.log(
-        `===============================>>>>>>>>>>>>>>>>> globalErrorHandler ~~`,
+        `Global_Error_Handler:===============================>>>>>>>>>>>>>>>>>`,
         error
       )
     : errorLogger.error(
-        `===============================>>>>>>>>>>>>>>>>> globalErrorHandler ~~`,
+        `Global_Error_Handler:===============================>>>>>>>>>>>>>>>>>`,
         error
       );
 
@@ -66,6 +66,7 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   }
 
   res.status(statusCode).json({
+    statusCode,
     success: false,
     message,
     errorMessages,

@@ -2,8 +2,8 @@ import { Prisma } from '@prisma/client';
 import IGenericErrorMessage from '../interfaces/error';
 
 const handleClientError = (error: Prisma.PrismaClientKnownRequestError) => {
-  let errors: IGenericErrorMessage[] = [];
   let message = '';
+  let errors: IGenericErrorMessage[] = [];
   const statusCode = 400;
 
   if (error.code === 'P2025') {
@@ -17,6 +17,14 @@ const handleClientError = (error: Prisma.PrismaClientKnownRequestError) => {
   } else if (error.code === 'P2003') {
     if (error.message.includes('delete()` invocation:')) {
       message = 'Delete failed';
+      errors = [
+        {
+          path: '',
+          message,
+        },
+      ];
+    } else if (error.message.includes('create()` invocation:')) {
+      message = `Foreign key constraint failed: ${error?.meta?.field_name}`;
       errors = [
         {
           path: '',

@@ -5,6 +5,7 @@ import { profileRoutes } from '../modules/profile/profile.route';
 import { projectRoutes } from '../modules/project/project.route';
 import { roleRoutes } from '../modules/role/role.route';
 import { taskStatusRoutes } from '../modules/taskStatus/taskStatus.route';
+import { teamRoutes } from '../modules/team/team.route';
 import { userRoutes } from '../modules/user/user.route';
 
 const routes = express.Router();
@@ -37,6 +38,10 @@ const moduleRoutes = [
   {
     path: '/projects',
     route: projectRoutes,
+  },
+  {
+    path: '/teams',
+    route: teamRoutes,
   },
 ];
 
